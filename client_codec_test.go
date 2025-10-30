@@ -78,6 +78,6 @@ func TestClientCodec(t *testing.T) {
 		v, n, err := codec.Decode(r)
 		assertfatal.EqualError(err, nil, t)
 		assertfatal.Equal(n, wantN, t)
-		assertfatal.EqualDeep(proto.Equal(v, wantV), true, t)
+		assertfatal.EqualDeep(proto.Equal(v.(proto.Message), wantV), true, t)
 	})
 }

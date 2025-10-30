@@ -7,7 +7,6 @@ import (
 
 	codecgnrc "github.com/cmd-stream/codec-generic-go"
 	"github.com/cmd-stream/transport-go"
-	"google.golang.org/protobuf/proto"
 )
 
 const errorPrefix = "codecproto: "
@@ -17,7 +16,7 @@ const errorPrefix = "codecproto: "
 // Parameters:
 //   - types1 lists the Go types that can be encoded.
 //   - types2 lists the Go types that can be decoded.
-func NewCodec[T, V proto.Message](types1 []reflect.Type,
+func NewCodec[T, V any](types1 []reflect.Type,
 	types2 []reflect.Type,
 ) Codec[T, V] {
 	return Codec[T, V]{

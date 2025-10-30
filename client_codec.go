@@ -2,6 +2,8 @@ package codec
 
 import (
 	"reflect"
+
+	"github.com/cmd-stream/core-go"
 )
 
 // NewClientCodec creates a Protobuf Codec for the client side.
@@ -12,7 +14,7 @@ import (
 // Note: The order of types matters — two codecs created with the same types
 // in a different order are not considered equal.
 func NewClientCodec[T any](cmdTypes []reflect.Type, resultTypes []reflect.Type) (
-	codec Codec[Cmd[T], Result],
+	codec Codec[core.Cmd[T], core.Result],
 ) {
-	return NewCodec[Cmd[T], Result](cmdTypes, resultTypes)
+	return NewCodec[core.Cmd[T], core.Result](cmdTypes, resultTypes)
 }
