@@ -9,6 +9,10 @@
 It maps concrete Command and Result types to internal identifiers,
 allowing type-safe serialization across network boundaries.
 
+**Important:** This Protobuf codec expects all Command and Result types
+to implement `proto.Message`. If a type does not implement `proto.Message`,
+the codec will panic at runtime.
+
 ## How To
 
 ```go
