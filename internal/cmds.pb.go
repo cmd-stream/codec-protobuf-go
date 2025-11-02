@@ -4,7 +4,7 @@
 // 	protoc        v3.21.10
 // source: testdata/cmds.proto
 
-package testdata
+package internal
 
 import (
 	reflect "reflect"

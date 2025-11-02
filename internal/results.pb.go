@@ -2,16 +2,17 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.10
-// source: testdata/results.proto
+// source: internal/results.proto
 
-package testdata
+package internal
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -131,11 +132,13 @@ func file_testdata_results_proto_rawDescGZIP() []byte {
 	return file_testdata_results_proto_rawDescData
 }
 
-var file_testdata_results_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_testdata_results_proto_goTypes = []any{
-	(*Result1)(nil), // 0: protobuf.Result1
-	(*Result2)(nil), // 1: protobuf.Result2
-}
+var (
+	file_testdata_results_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+	file_testdata_results_proto_goTypes  = []any{
+		(*Result1)(nil), // 0: protobuf.Result1
+		(*Result2)(nil), // 1: protobuf.Result2
+	}
+)
 var file_testdata_results_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
