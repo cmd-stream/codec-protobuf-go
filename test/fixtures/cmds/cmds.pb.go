@@ -2,17 +2,16 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.10
-// source: testdata/cmds.proto
+// source: cmds/cmds.proto
 
-package internal
+package cmds
 
 import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -31,7 +30,7 @@ type Cmd1 struct {
 
 func (x *Cmd1) Reset() {
 	*x = Cmd1{}
-	mi := &file_testdata_cmds_proto_msgTypes[0]
+	mi := &file_cmds_cmds_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +42,7 @@ func (x *Cmd1) String() string {
 func (*Cmd1) ProtoMessage() {}
 
 func (x *Cmd1) ProtoReflect() protoreflect.Message {
-	mi := &file_testdata_cmds_proto_msgTypes[0]
+	mi := &file_cmds_cmds_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +55,7 @@ func (x *Cmd1) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cmd1.ProtoReflect.Descriptor instead.
 func (*Cmd1) Descriptor() ([]byte, []int) {
-	return file_testdata_cmds_proto_rawDescGZIP(), []int{0}
+	return file_cmds_cmds_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Cmd1) GetX() int64 {
@@ -75,7 +74,7 @@ type Cmd2 struct {
 
 func (x *Cmd2) Reset() {
 	*x = Cmd2{}
-	mi := &file_testdata_cmds_proto_msgTypes[1]
+	mi := &file_cmds_cmds_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +86,7 @@ func (x *Cmd2) String() string {
 func (*Cmd2) ProtoMessage() {}
 
 func (x *Cmd2) ProtoReflect() protoreflect.Message {
-	mi := &file_testdata_cmds_proto_msgTypes[1]
+	mi := &file_cmds_cmds_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +99,7 @@ func (x *Cmd2) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Cmd2.ProtoReflect.Descriptor instead.
 func (*Cmd2) Descriptor() ([]byte, []int) {
-	return file_testdata_cmds_proto_rawDescGZIP(), []int{1}
+	return file_cmds_cmds_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Cmd2) GetY() string {
@@ -110,37 +109,34 @@ func (x *Cmd2) GetY() string {
 	return ""
 }
 
-var File_testdata_cmds_proto protoreflect.FileDescriptor
+var File_cmds_cmds_proto protoreflect.FileDescriptor
 
-const file_testdata_cmds_proto_rawDesc = "" +
+const file_cmds_cmds_proto_rawDesc = "" +
 	"\n" +
-	"\x13testdata/cmds.proto\x12\bprotobuf\"\x14\n" +
+	"\x0fcmds/cmds.proto\x12\bprotobuf\"\x14\n" +
 	"\x04Cmd1\x12\f\n" +
 	"\x01X\x18\x01 \x01(\x03R\x01X\"\x14\n" +
 	"\x04Cmd2\x12\f\n" +
-	"\x01Y\x18\x01 \x01(\tR\x01YB2Z0github.com/cmd-stream/codec-protobuf-go/testdatab\x06proto3"
+	"\x01Y\x18\x01 \x01(\tR\x01YB.Z,github.com/cmd-stream/codec-protobuf-go/cmdsb\x06proto3"
 
 var (
-	file_testdata_cmds_proto_rawDescOnce sync.Once
-	file_testdata_cmds_proto_rawDescData []byte
+	file_cmds_cmds_proto_rawDescOnce sync.Once
+	file_cmds_cmds_proto_rawDescData []byte
 )
 
-func file_testdata_cmds_proto_rawDescGZIP() []byte {
-	file_testdata_cmds_proto_rawDescOnce.Do(func() {
-		file_testdata_cmds_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_testdata_cmds_proto_rawDesc), len(file_testdata_cmds_proto_rawDesc)))
+func file_cmds_cmds_proto_rawDescGZIP() []byte {
+	file_cmds_cmds_proto_rawDescOnce.Do(func() {
+		file_cmds_cmds_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_cmds_cmds_proto_rawDesc), len(file_cmds_cmds_proto_rawDesc)))
 	})
-	return file_testdata_cmds_proto_rawDescData
+	return file_cmds_cmds_proto_rawDescData
 }
 
-var (
-	file_testdata_cmds_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-	file_testdata_cmds_proto_goTypes  = []any{
-		(*Cmd1)(nil), // 0: protobuf.Cmd1
-		(*Cmd2)(nil), // 1: protobuf.Cmd2
-	}
-)
-
-var file_testdata_cmds_proto_depIdxs = []int32{
+var file_cmds_cmds_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_cmds_cmds_proto_goTypes = []any{
+	(*Cmd1)(nil), // 0: protobuf.Cmd1
+	(*Cmd2)(nil), // 1: protobuf.Cmd2
+}
+var file_cmds_cmds_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -148,26 +144,26 @@ var file_testdata_cmds_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_testdata_cmds_proto_init() }
-func file_testdata_cmds_proto_init() {
-	if File_testdata_cmds_proto != nil {
+func init() { file_cmds_cmds_proto_init() }
+func file_cmds_cmds_proto_init() {
+	if File_cmds_cmds_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_testdata_cmds_proto_rawDesc), len(file_testdata_cmds_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cmds_cmds_proto_rawDesc), len(file_cmds_cmds_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_testdata_cmds_proto_goTypes,
-		DependencyIndexes: file_testdata_cmds_proto_depIdxs,
-		MessageInfos:      file_testdata_cmds_proto_msgTypes,
+		GoTypes:           file_cmds_cmds_proto_goTypes,
+		DependencyIndexes: file_cmds_cmds_proto_depIdxs,
+		MessageInfos:      file_cmds_cmds_proto_msgTypes,
 	}.Build()
-	File_testdata_cmds_proto = out.File
-	file_testdata_cmds_proto_goTypes = nil
-	file_testdata_cmds_proto_depIdxs = nil
+	File_cmds_cmds_proto = out.File
+	file_cmds_cmds_proto_goTypes = nil
+	file_cmds_cmds_proto_depIdxs = nil
 }

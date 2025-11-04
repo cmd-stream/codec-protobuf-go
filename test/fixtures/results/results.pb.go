@@ -2,17 +2,16 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v3.21.10
-// source: internal/results.proto
+// source: results/results.proto
 
-package internal
+package results
 
 import (
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -31,7 +30,7 @@ type Result1 struct {
 
 func (x *Result1) Reset() {
 	*x = Result1{}
-	mi := &file_testdata_results_proto_msgTypes[0]
+	mi := &file_results_results_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +42,7 @@ func (x *Result1) String() string {
 func (*Result1) ProtoMessage() {}
 
 func (x *Result1) ProtoReflect() protoreflect.Message {
-	mi := &file_testdata_results_proto_msgTypes[0]
+	mi := &file_results_results_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +55,7 @@ func (x *Result1) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Result1.ProtoReflect.Descriptor instead.
 func (*Result1) Descriptor() ([]byte, []int) {
-	return file_testdata_results_proto_rawDescGZIP(), []int{0}
+	return file_results_results_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Result1) GetX() int64 {
@@ -75,7 +74,7 @@ type Result2 struct {
 
 func (x *Result2) Reset() {
 	*x = Result2{}
-	mi := &file_testdata_results_proto_msgTypes[1]
+	mi := &file_results_results_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +86,7 @@ func (x *Result2) String() string {
 func (*Result2) ProtoMessage() {}
 
 func (x *Result2) ProtoReflect() protoreflect.Message {
-	mi := &file_testdata_results_proto_msgTypes[1]
+	mi := &file_results_results_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +99,7 @@ func (x *Result2) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Result2.ProtoReflect.Descriptor instead.
 func (*Result2) Descriptor() ([]byte, []int) {
-	return file_testdata_results_proto_rawDescGZIP(), []int{1}
+	return file_results_results_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Result2) GetY() string {
@@ -110,36 +109,34 @@ func (x *Result2) GetY() string {
 	return ""
 }
 
-var File_testdata_results_proto protoreflect.FileDescriptor
+var File_results_results_proto protoreflect.FileDescriptor
 
-const file_testdata_results_proto_rawDesc = "" +
+const file_results_results_proto_rawDesc = "" +
 	"\n" +
-	"\x16testdata/results.proto\x12\bprotobuf\"\x17\n" +
+	"\x15results/results.proto\x12\bprotobuf\"\x17\n" +
 	"\aResult1\x12\f\n" +
 	"\x01X\x18\x01 \x01(\x03R\x01X\"\x17\n" +
 	"\aResult2\x12\f\n" +
-	"\x01Y\x18\x01 \x01(\tR\x01YB2Z0github.com/cmd-stream/codec-protobuf-go/testdatab\x06proto3"
+	"\x01Y\x18\x01 \x01(\tR\x01YB1Z/github.com/cmd-stream/codec-protobuf-go/resultsb\x06proto3"
 
 var (
-	file_testdata_results_proto_rawDescOnce sync.Once
-	file_testdata_results_proto_rawDescData []byte
+	file_results_results_proto_rawDescOnce sync.Once
+	file_results_results_proto_rawDescData []byte
 )
 
-func file_testdata_results_proto_rawDescGZIP() []byte {
-	file_testdata_results_proto_rawDescOnce.Do(func() {
-		file_testdata_results_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_testdata_results_proto_rawDesc), len(file_testdata_results_proto_rawDesc)))
+func file_results_results_proto_rawDescGZIP() []byte {
+	file_results_results_proto_rawDescOnce.Do(func() {
+		file_results_results_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_results_results_proto_rawDesc), len(file_results_results_proto_rawDesc)))
 	})
-	return file_testdata_results_proto_rawDescData
+	return file_results_results_proto_rawDescData
 }
 
-var (
-	file_testdata_results_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-	file_testdata_results_proto_goTypes  = []any{
-		(*Result1)(nil), // 0: protobuf.Result1
-		(*Result2)(nil), // 1: protobuf.Result2
-	}
-)
-var file_testdata_results_proto_depIdxs = []int32{
+var file_results_results_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_results_results_proto_goTypes = []any{
+	(*Result1)(nil), // 0: protobuf.Result1
+	(*Result2)(nil), // 1: protobuf.Result2
+}
+var file_results_results_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -147,26 +144,26 @@ var file_testdata_results_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_testdata_results_proto_init() }
-func file_testdata_results_proto_init() {
-	if File_testdata_results_proto != nil {
+func init() { file_results_results_proto_init() }
+func file_results_results_proto_init() {
+	if File_results_results_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_testdata_results_proto_rawDesc), len(file_testdata_results_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_results_results_proto_rawDesc), len(file_results_results_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_testdata_results_proto_goTypes,
-		DependencyIndexes: file_testdata_results_proto_depIdxs,
-		MessageInfos:      file_testdata_results_proto_msgTypes,
+		GoTypes:           file_results_results_proto_goTypes,
+		DependencyIndexes: file_results_results_proto_depIdxs,
+		MessageInfos:      file_results_results_proto_msgTypes,
 	}.Build()
-	File_testdata_results_proto = out.File
-	file_testdata_results_proto_goTypes = nil
-	file_testdata_results_proto_depIdxs = nil
+	File_results_results_proto = out.File
+	file_results_results_proto_goTypes = nil
+	file_results_results_proto_depIdxs = nil
 }

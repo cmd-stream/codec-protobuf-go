@@ -5,7 +5,8 @@ import (
 	"testing"
 
 	"github.com/cmd-stream/codec-protobuf-go"
-	"github.com/cmd-stream/codec-protobuf-go/internal"
+	"github.com/cmd-stream/codec-protobuf-go/test/fixtures/cmds"
+	"github.com/cmd-stream/codec-protobuf-go/test/fixtures/results"
 	"google.golang.org/protobuf/proto"
 
 	tmocks "github.com/cmd-stream/testkit-go/mocks/transport"
@@ -15,7 +16,7 @@ import (
 func TestServerCodec(t *testing.T) {
 	t.Run("Encoding should work", func(t *testing.T) {
 		wantDTM := 0
-		result := &internal.Result1{X: 10}
+		result := &results.Result1{X: 10}
 		wantBs, err := proto.Marshal(result)
 		assertfatal.EqualError(err, nil, t)
 		wantLen := len(wantBs)
@@ -23,12 +24,12 @@ func TestServerCodec(t *testing.T) {
 
 		c := codec.NewServerCodec[any](
 			[]reflect.Type{
-				reflect.TypeFor[*internal.Cmd1](),
-				reflect.TypeFor[*internal.Cmd2](),
+				reflect.TypeFor[*cmds.Cmd1](),
+				reflect.TypeFor[*cmds.Cmd2](),
 			},
 			[]reflect.Type{
-				reflect.TypeFor[*internal.Result1](),
-				reflect.TypeFor[*internal.Result2](),
+				reflect.TypeFor[*results.Result1](),
+				reflect.TypeFor[*results.Result2](),
 			},
 		)
 
@@ -50,7 +51,7 @@ func TestServerCodec(t *testing.T) {
 
 	t.Run("Decoding should work", func(t *testing.T) {
 		wantDTM := 1
-		wantV := &internal.Cmd2{Y: "hello"}
+		wantV := &cmds.Cmd2{Y: "hello"}
 		wantBs, err := proto.Marshal(wantV)
 		assertfatal.EqualError(err, nil, t)
 		wantLen := len(wantBs)
@@ -58,12 +59,12 @@ func TestServerCodec(t *testing.T) {
 
 		c := codec.NewServerCodec[any](
 			[]reflect.Type{
-				reflect.TypeFor[*internal.Cmd1](),
-				reflect.TypeFor[*internal.Cmd2](),
+				reflect.TypeFor[*cmds.Cmd1](),
+				reflect.TypeFor[*cmds.Cmd2](),
 			},
 			[]reflect.Type{
-				reflect.TypeFor[*internal.Result1](),
-				reflect.TypeFor[*internal.Result2](),
+				reflect.TypeFor[*results.Result1](),
+				reflect.TypeFor[*results.Result2](),
 			},
 		)
 
