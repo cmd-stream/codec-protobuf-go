@@ -4,10 +4,10 @@
 [![GoReportCard](https://goreportcard.com/badge/cmd-stream/codec-protobuf-go)](https://goreportcard.com/report/github.com/cmd-stream/codec-protobuf-go)
 [![codecov](https://codecov.io/gh/cmd-stream/codec-protobuf-go/graph/badge.svg?token=3ACEL5m6LC)](https://codecov.io/gh/cmd-stream/codec-protobuf-go)
 
-**codec-protobuf-go** provides a Protobuf-based codec for [cmd-stream-go](https://github.com/cmd-stream/cmd-stream-go).
+**codec-protobuf** provides a Protobuf-based codec for [cmd-stream](https://github.com/cmd-stream/cmd-stream-go).
 
-It maps concrete Command and Result types to internal identifiers,
-allowing type-safe serialization across network boundaries.
+It maps concrete Command and Result types to internal identifiers, allowing 
+type-safe serialization across network boundaries.
 
 **Important:** This Protobuf codec expects all Command and Result types
 to implement `proto.Message`. If a type does not implement `proto.Message`,
@@ -18,7 +18,7 @@ the codec will panic at runtime.
 ```go
 import (
   "reflect"
-  codec "github.com/cmd-stream/codec-protobuf-go"
+  cdc "github.com/cmd-stream/codec-protobuf-go"
 )
 
 var (
@@ -32,7 +32,7 @@ var (
     reflect.TypeFor[*YourResult](),
     // ...
   }
-  serverCodec = codec.NewServerCodec(cmdTypes, resultTypes)
-  clientCodec = codec.NewClientCodec(cmdTypes, resultTypes)
+  serverCodec = cdc.NewServerCodec(cmdTypes, resultTypes)
+  clientCodec = cdc.NewClientCodec(cmdTypes, resultTypes)
 )
 ```
