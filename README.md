@@ -36,3 +36,7 @@ var (
   clientCodec = cdc.NewClientCodec(cmdTypes, resultTypes)
 )
 ```
+
+## Example
+
+A full example of how to use **codec-protobuf** can be found [here](https://github.com/cmd-stream/examples-go/tree/main/calc_protobuf).
