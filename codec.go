@@ -6,7 +6,7 @@ import (
 	"reflect"
 
 	"github.com/cmd-stream/cmd-stream-go/transport"
-	gnrc "github.com/cmd-stream/codec-generic-go"
+	cdc "github.com/cmd-stream/codec-go"
 )
 
 const ErrorPrefix = "codecproto: "
@@ -14,7 +14,7 @@ const ErrorPrefix = "codecproto: "
 // codec represents a generic type-safe Protobuf codec.
 // T is the type used for encoding, V is the type used for decoding.
 type codec[T, V any] struct {
-	gnrc.Codec[T, V]
+	cdc.Codec[T, V]
 }
 
 // newCodec constructs a Protobuf codec.
@@ -24,7 +24,7 @@ type codec[T, V any] struct {
 //   - types2 lists the Go types that will be decoded by the Serializer.
 func newCodec[T, V any](types1 []reflect.Type, types2 []reflect.Type) codec[T, V] {
 	return codec[T, V]{
-		gnrc.NewCodecWithDecoder(types1, types2, Serializer[T, V]{}, decodeValue),
+		cdc.NewCodecWithDecoder(types1, types2, Serializer[T, V]{}, decodeValue),
 	}
 }
 
