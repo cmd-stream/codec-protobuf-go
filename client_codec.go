@@ -24,3 +24,9 @@ func NewClientCodec[T any](cmdTypes []reflect.Type, resultTypes []reflect.Type) 
 ) {
 	return newCodec[core.Cmd[T], core.Result](cmdTypes, resultTypes)
 }
+
+// NewClientCodecWith creates a Protobuf codec for the client side using the
+// provided Registry.
+func NewClientCodecWith[T any](registry *Registry[T]) ClientCodec[T] {
+	return NewClientCodec[T](registry.Cmds(), registry.Results())
+}

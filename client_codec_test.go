@@ -122,3 +122,34 @@ func TestClientCodec_DecodeError(t *testing.T) {
 	assertfatal.EqualDeep(t, errors.Is(err, wantErr), true)
 	assertfatal.EqualDeep(t, err.Error()[:len(cdc.ErrorPrefix)], cdc.ErrorPrefix)
 }
+func TestNewClientCodecWith(t *testing.T) {
+	var (
+		wantDTM   = 1
+		wantV     = &test.Result2{Y: "hello"}
+		wantBs, _ = proto.Marshal(wantV)
+		wantLen   = len(wantBs)
+		wantN     = 1 + 1 + wantLen
+		reader    = tmock.NewReader()
+		reg       = cdc.NewRegistry[any](
+			cdc.WithCmd[any, *test.Cmd1](),
+			cdc.WithCmd[any, *test.Cmd2](),
+			cdc.WithResult[any, *test.Result1](),
+			cdc.WithResult[any, *test.Result2](),
+		)
+	)
+	reader.RegisterReadByte(
+		func() (b byte, err error) { return byte(wantDTM), nil },
+	).RegisterReadByte(
+		func() (b byte, err error) { return byte(wantLen), nil },
+	).RegisterRead(
+		func(p []byte) (n int, err error) {
+			copy(p, wantBs)
+			return wantLen, nil
+		},
+	)
+	codec := cdc.NewClientCodecWith(reg)
+	v, n, err := codec.Decode(reader)
+	assertfatal.EqualError(t, err, nil)
+	assertfatal.Equal(t, n, wantN)
+	assertfatal.EqualDeep(t, proto.Equal(v.(proto.Message), wantV), true)
+}
