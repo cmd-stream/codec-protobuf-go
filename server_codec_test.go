@@ -9,7 +9,7 @@ import (
 	"github.com/cmd-stream/codec-protobuf-go/test"
 	"google.golang.org/protobuf/proto"
 
-	tmock "github.com/cmd-stream/cmd-stream-go/test/mock/transport"
+	cmock "github.com/cmd-stream/cmd-stream-go/test/mock"
 	assertfatal "github.com/ymz-ncnk/assert/fatal"
 )
 
@@ -20,7 +20,7 @@ func TestServerCodec_Encode(t *testing.T) {
 		wantBs, _ = proto.Marshal(result)
 		wantLen   = len(wantBs)
 		wantN     = 1 + 1 + wantLen
-		writer    = tmock.NewWriter()
+		writer    = cmock.NewWriter()
 	)
 	writer.RegisterWriteByte(
 		func(b byte) error {
@@ -57,7 +57,7 @@ func TestServerCodec_EncodeError(t *testing.T) {
 	var (
 		result  = &test.Result1{X: 10}
 		wantErr = errors.New("write error")
-		writer  = tmock.NewWriter()
+		writer  = cmock.NewWriter()
 	)
 	writer.RegisterWriteByte(func(b byte) error {
 		return wantErr
@@ -78,7 +78,7 @@ func TestServerCodec_Decode(t *testing.T) {
 		wantBs, _ = proto.Marshal(wantV)
 		wantLen   = len(wantBs)
 		wantN     = 1 + 1 + wantLen
-		reader    = tmock.NewReader()
+		reader    = cmock.NewReader()
 	)
 	reader.RegisterReadByte(
 		func() (b byte, err error) { return byte(wantDTM), nil },
@@ -109,7 +109,7 @@ func TestServerCodec_Decode(t *testing.T) {
 func TestServerCodec_DecodeError(t *testing.T) {
 	var (
 		wantErr = errors.New("read error")
-		reader  = tmock.NewReader()
+		reader  = cmock.NewReader()
 	)
 	reader.RegisterReadByte(func() (b byte, err error) {
 		return 0, wantErr
@@ -129,7 +129,7 @@ func TestNewServerCodecWith(t *testing.T) {
 		wantBs, _ = proto.Marshal(wantV)
 		wantLen   = len(wantBs)
 		wantN     = 1 + 1 + wantLen
-		reader    = tmock.NewReader()
+		reader    = cmock.NewReader()
 		reg       = cdc.NewRegistry[any](
 			cdc.WithCmd[any, *test.Cmd1](),
 			cdc.WithCmd[any, *test.Cmd2](),
