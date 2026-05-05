@@ -2,20 +2,15 @@ package test
 
 import (
 	"context"
-	"time"
 
 	"github.com/cmd-stream/cmd-stream-go/core"
 )
 
-func (c *Cmd1) Exec(ctx context.Context, seq core.Seq, at time.Time,
-	receiver any, proxy core.Proxy,
-) error {
+func (c *Cmd1) Exec(ctx context.Context, receiver any, proxy core.Proxy) error {
 	return nil
 }
 
-func (c *Cmd2) Exec(ctx context.Context, seq core.Seq, at time.Time,
-	receiver any, proxy core.Proxy,
-) error {
+func (c *Cmd2) Exec(ctx context.Context, receiver any, proxy core.Proxy) error {
 	return nil
 }
 
