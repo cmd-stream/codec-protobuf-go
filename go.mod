@@ -7,7 +7,7 @@ require (
 	github.com/cmd-stream/codec-go v0.0.0-20260506154350-6700faae3a47
 	github.com/mus-format/common-go v0.0.0-20260324174526-3d8f1741b5a2
 	github.com/ymz-ncnk/assert v0.0.0-20260108210721-155bc9aa4282
-	google.golang.org/protobuf v1.36.10
+	google.golang.org/protobuf v1.36.11
 )
 
 require (
