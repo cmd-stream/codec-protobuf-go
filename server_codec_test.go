@@ -5,8 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	cdc "github.com/cmd-stream/codec-protobuf-go"
+	cdcproto "github.com/cmd-stream/codec-protobuf-go"
 	"github.com/cmd-stream/codec-protobuf-go/test"
+	com "github.com/mus-format/common-go"
 	"google.golang.org/protobuf/proto"
 
 	cmock "github.com/cmd-stream/cmd-stream-go/test/mock"
@@ -38,7 +39,7 @@ func TestServerCodec_Encode(t *testing.T) {
 			return len(p), nil
 		},
 	)
-	codec := cdc.NewServerCodec[any](
+	codec := cdcproto.NewServerCodec[any](
 		[]reflect.Type{
 			reflect.TypeFor[*test.Cmd1](),
 			reflect.TypeFor[*test.Cmd2](),
@@ -62,13 +63,13 @@ func TestServerCodec_EncodeError(t *testing.T) {
 	writer.RegisterWriteByte(func(b byte) error {
 		return wantErr
 	})
-	codec := cdc.NewServerCodec[any](
+	codec := cdcproto.NewServerCodec[any](
 		[]reflect.Type{reflect.TypeFor[*test.Cmd1]()},
 		[]reflect.Type{reflect.TypeFor[*test.Result1]()},
 	)
 	_, err := codec.Encode(result, writer)
 	assertfatal.EqualDeep(t, errors.Is(err, wantErr), true)
-	assertfatal.EqualDeep(t, err.Error()[:len(cdc.ErrorPrefix)], cdc.ErrorPrefix)
+	assertfatal.EqualDeep(t, err.Error()[:len(cdcproto.ErrorPrefix)], cdcproto.ErrorPrefix)
 }
 
 func TestServerCodec_Decode(t *testing.T) {
@@ -90,7 +91,7 @@ func TestServerCodec_Decode(t *testing.T) {
 			return wantLen, nil
 		},
 	)
-	codec := cdc.NewServerCodec[any](
+	codec := cdcproto.NewServerCodec[any](
 		[]reflect.Type{
 			reflect.TypeFor[*test.Cmd1](),
 			reflect.TypeFor[*test.Cmd2](),
@@ -114,13 +115,13 @@ func TestServerCodec_DecodeError(t *testing.T) {
 	reader.RegisterReadByte(func() (b byte, err error) {
 		return 0, wantErr
 	})
-	codec := cdc.NewServerCodec[any](
+	codec := cdcproto.NewServerCodec[any](
 		[]reflect.Type{reflect.TypeFor[*test.Cmd1]()},
 		[]reflect.Type{reflect.TypeFor[*test.Result1]()},
 	)
 	_, _, err := codec.Decode(reader)
 	assertfatal.EqualDeep(t, errors.Is(err, wantErr), true)
-	assertfatal.EqualDeep(t, err.Error()[:len(cdc.ErrorPrefix)], cdc.ErrorPrefix)
+	assertfatal.EqualDeep(t, err.Error()[:len(cdcproto.ErrorPrefix)], cdcproto.ErrorPrefix)
 }
 func TestNewServerCodecWith(t *testing.T) {
 	var (
@@ -130,11 +131,11 @@ func TestNewServerCodecWith(t *testing.T) {
 		wantLen   = len(wantBs)
 		wantN     = 1 + 1 + wantLen
 		reader    = cmock.NewReader()
-		reg       = cdc.NewRegistry[any](
-			cdc.WithCmd[any, *test.Cmd1](),
-			cdc.WithCmd[any, *test.Cmd2](),
-			cdc.WithResult[any, *test.Result1](),
-			cdc.WithResult[any, *test.Result2](),
+		reg       = cdcproto.NewRegistry[any](
+			cdcproto.WithCmd[any, *test.Cmd1](),
+			cdcproto.WithCmd[any, *test.Cmd2](),
+			cdcproto.WithResult[any, *test.Result1](),
+			cdcproto.WithResult[any, *test.Result2](),
 		)
 	)
 	reader.RegisterReadByte(
@@ -147,9 +148,29 @@ func TestNewServerCodecWith(t *testing.T) {
 			return wantLen, nil
 		},
 	)
-	codec := cdc.NewServerCodecWith(reg)
+	codec := cdcproto.NewServerCodecWith(reg)
 	v, n, err := codec.Decode(reader)
 	assertfatal.EqualError(t, err, nil)
 	assertfatal.Equal(t, n, wantN)
 	assertfatal.EqualDeep(t, proto.Equal(v.(proto.Message), wantV), true)
+}
+
+func TestServerCodec_MaxLenOption(t *testing.T) {
+	var (
+		maxLen = 5
+		reader = cmock.NewReader()
+	)
+	reader.RegisterReadByte(
+		func() (b byte, err error) { return 0, nil },
+	).RegisterReadByte(
+		func() (b byte, err error) { return byte(10), nil },
+	)
+	codec := cdcproto.NewServerCodec[any](
+		[]reflect.Type{reflect.TypeFor[test.Cmd2]()},
+		[]reflect.Type{reflect.TypeFor[test.Result1]()},
+		cdcproto.WithMaxLen(maxLen),
+	)
+
+	_, _, err := codec.Decode(reader)
+	assertfatal.EqualDeep(t, errors.Is(err, com.ErrTooLargeLength), true)
 }

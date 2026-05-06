@@ -22,9 +22,11 @@ type codec[T, V any] struct {
 // Parameters:
 //   - types1 lists the Go types that will be encoded by the Serializer.
 //   - types2 lists the Go types that will be decoded by the Serializer.
-func newCodec[T, V any](types1 []reflect.Type, types2 []reflect.Type) codec[T, V] {
+func newCodec[T, V any](types1 []reflect.Type, types2 []reflect.Type,
+	opts ...cdc.SetOption) codec[T, V] {
 	return codec[T, V]{
-		cdc.NewCodecWithDecoder(types1, types2, Serializer[T, V]{}, decodeValue),
+		cdc.NewCodecWithDecoder(types1, types2, Serializer[T, V]{}, decodeValue,
+			opts...),
 	}
 }
 

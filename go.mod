@@ -3,14 +3,14 @@ module github.com/cmd-stream/codec-protobuf-go
 go 1.24.1
 
 require (
-	github.com/cmd-stream/cmd-stream-go v0.7.1
-	github.com/cmd-stream/codec-go v0.0.0-20260505034159-53997a558d67
+	github.com/cmd-stream/cmd-stream-go v0.7.2
+	github.com/cmd-stream/codec-go v0.0.0-20260506154350-6700faae3a47
+	github.com/mus-format/common-go v0.0.0-20260324174526-3d8f1741b5a2
 	github.com/ymz-ncnk/assert v0.0.0-20260108210721-155bc9aa4282
 	google.golang.org/protobuf v1.36.10
 )
 
 require (
-	github.com/mus-format/common-go v0.0.0-20260324174526-3d8f1741b5a2 // indirect
 	github.com/mus-format/mus-stream-go v0.10.1 // indirect
 	github.com/ymz-ncnk/mok v0.2.2 // indirect
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect

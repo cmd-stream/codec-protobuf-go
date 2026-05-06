@@ -19,14 +19,14 @@ type ClientCodec[T any] = codec[core.Cmd[T], core.Result]
 //
 // Note: The order of types matters — two codecs created with the same types
 // in a different order are not considered equal.
-func NewClientCodec[T any](cmdTypes []reflect.Type, resultTypes []reflect.Type) (
-	codec ClientCodec[T],
-) {
-	return newCodec[core.Cmd[T], core.Result](cmdTypes, resultTypes)
+func NewClientCodec[T any](cmdTypes []reflect.Type, resultTypes []reflect.Type,
+	opts ...SetOption,
+) (codec ClientCodec[T]) {
+	return newCodec[core.Cmd[T], core.Result](cmdTypes, resultTypes, opts...)
 }
 
 // NewClientCodecWith creates a Protobuf codec for the client side using the
 // provided Registry.
-func NewClientCodecWith[T any](registry *Registry[T]) ClientCodec[T] {
-	return NewClientCodec[T](registry.Cmds(), registry.Results())
+func NewClientCodecWith[T any](registry *Registry[T], opts ...SetOption) ClientCodec[T] {
+	return NewClientCodec[T](registry.Cmds(), registry.Results(), opts...)
 }
